@@ -1,0 +1,148 @@
+自定义菜单事件
+	1： 点击菜单拉取消息时的事件推送
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[FromUser]]></FromUserName>
+		<CreateTime>123456789</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+		<Event><![CDATA[CLICK]]></Event>
+		<EventKey><![CDATA[EVENTKEY]]></EventKey>
+	</xml>
+	
+	2： 点击菜单跳转链接时的事件推送
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[FromUser]]></FromUserName>
+		<CreateTime>123456789</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+		<Event><![CDATA[VIEW]]></Event>
+		<EventKey><![CDATA[www.qq.com]]></EventKey>
+	</xml>
+	
+	
+关注实测数据结果： 比官方文档多出一个 EventKey 标记
+	 <xml>
+		 <ToUserName><![CDATA[gh_e21b62f685f4]]></ToUserName>
+		 <FromUserName><![CDATA[o5Ljujn78A_S0uk_WvAM_fKFEXm4]]></FromUserName>
+		 <CreateTime>1411785252</CreateTime>
+		 <MsgType><![CDATA[event]]></MsgType>
+		 <Event><![CDATA[subscribe]]></Event>
+		 <EventKey><![CDATA[]]></EventKey>
+	 </xml>
+	 
+取消关注实测数据结果：比官方文档多出一个 EventKey 标记
+	 <xml>
+		 <ToUserName><![CDATA[gh_e21b62f685f4]]></ToUserName>
+		 <FromUserName><![CDATA[o5Ljujn78A_S0uk_WvAM_fKFEXm4]]></FromUserName>
+		 <CreateTime>1411785559</CreateTime>
+		 <MsgType><![CDATA[event]]></MsgType>
+		 <Event><![CDATA[unsubscribe]]></Event>
+		 <EventKey><![CDATA[]]></EventKey>
+	 </xml>
+	
+接入会话：
+	 <xml>
+		 <ToUserName><![CDATA[touser]]></ToUserName>
+		 <FromUserName><![CDATA[fromuser]]></FromUserName>
+		 <CreateTime>1399197672</CreateTime>
+		 <MsgType><![CDATA[event]]></MsgType>
+		 <Event><![CDATA[kf_create_session]]></Event>
+		 <KfAccount><![CDATA[test1@test]]></KfAccount>
+	 </xml>
+
+ 关闭会话：
+	 <xml>
+		 <ToUserName><![CDATA[touser]]></ToUserName>
+		 <FromUserName><![CDATA[fromuser]]></FromUserName>
+		 <CreateTime>1399197672</CreateTime>
+		 <MsgType><![CDATA[event]]></MsgType>
+		 <Event><![CDATA[kf_close_session]]></Event>
+		 <KfAccount><![CDATA[test1@test]]></KfAccount>
+	 </xml>
+
+ 转接会话：
+	 <xml>
+		 <ToUserName><![CDATA[touser]]></ToUserName>
+		 <FromUserName><![CDATA[fromuser]]></FromUserName>
+		 <CreateTime>1399197672</CreateTime>
+		 <MsgType><![CDATA[event]]></MsgType>
+		 <Event><![CDATA[kf_switch_session]]></Event>
+		 <FromKfAccount><![CDATA[test1@test]]></FromKfAccount>
+		 <ToKfAccount><![CDATA[test2@test]]></ToKfAccount>
+	 </xml>
+	
+在模版消息发送任务完成后，微信服务器会将是否送达成功作为通知，发送到开发者中心中填写的服务器配置地址中
+	<xml>
+		<ToUserName><![CDATA[gh_7f083739789a]]></ToUserName>
+		<FromUserName><![CDATA[oia2TjuEGTNoeX76QEjQNrcURxG8]]></FromUserName>
+		<CreateTime>1395658920</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+		<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+		<MsgID>200163836</MsgID>
+		<Status><![CDATA[success]]></Status>
+	</xml>
+	
+上报地理位置事件
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>123456789</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+			<Event><![CDATA[LOCATION]]></Event>
+			<Latitude>23.137466</Latitude>
+			<Longitude>113.352425</Longitude>
+			<Precision>119.385040</Precision>
+	</xml>
+	
+扫描带参数二维码事件
+	1. 用户未关注时，进行关注后的事件推送
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[FromUser]]></FromUserName>
+		<CreateTime>123456789</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+			<Event><![CDATA[subscribe]]></Event>
+			<EventKey><![CDATA[qrscene_123123]]></EventKey>
+			<Ticket><![CDATA[TICKET]]></Ticket>
+	</xml>
+	
+	2. 用户已关注时的事件推送
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[FromUser]]></FromUserName>
+		<CreateTime>123456789</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+			<Event><![CDATA[SCAN]]></Event>
+			<EventKey><![CDATA[SCENE_VALUE]]></EventKey>
+			<Ticket><![CDATA[TICKET]]></Ticket>
+	</xml>
+	
+由于群发任务提交后，群发任务可能在一定时间后才完成，因此，群发接口调用时，仅会给出群发任务是否提交成功的提示，
+若群发任务提交成功，则在群发任务结束时，会向开发者在公众平台填写的开发者URL（callback URL）推送事件。
+	<xml>
+		<ToUserName><![CDATA[gh_7f083739789a]]></ToUserName>
+		<FromUserName><![CDATA[oia2TjuEGTNoeX76QEjQNrcURxG8]]></FromUserName>
+		<CreateTime>1395658920</CreateTime>
+		<MsgType><![CDATA[event]]></MsgType>
+		<Event><![CDATA[MASSSENDJOBFINISH]]></Event>
+		<MsgID>1988</MsgID>
+		<Status><![CDATA[sendsuccess]]></Status>
+		<TotalCount>100</TotalCount>
+		<FilterCount>80</FilterCount>
+		<SentCount>75</SentCount>
+		<ErrorCount>5</ErrorCount>
+	</xml>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

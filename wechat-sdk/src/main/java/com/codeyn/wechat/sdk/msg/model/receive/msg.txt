@@ -1,0 +1,124 @@
+	
+	接收文本消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName> 
+		<CreateTime>1348831860</CreateTime>
+		<MsgType><![CDATA[text]]></MsgType>
+		<MsgId>1234567890123456</MsgId>
+		<Content><![CDATA[this is a test]]></Content>
+	</xml>
+
+
+	接收图片消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1348831860</CreateTime>
+		<MsgType><![CDATA[image]]></MsgType>
+		<MsgId>1234567890123456</MsgId>
+		
+		<PicUrl><![CDATA[this is a url]]></PicUrl>
+		<MediaId><![CDATA[media_id]]></MediaId>
+	</xml>
+
+
+	接收视频消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1357290913</CreateTime>
+		<MsgType><![CDATA[video]]></MsgType>
+		
+		<MsgId>1234567890123456</MsgId>
+		<MediaId><![CDATA[media_id]]></MediaId>
+		<ThumbMediaId><![CDATA[thumb_media_id]]></ThumbMediaId>
+	</xml>
+
+
+	接收小视频消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1357290913</CreateTime>
+		<MsgType><![CDATA[shortvideo]]></MsgType>
+		
+		<MsgId>1234567890123456</MsgId>
+		<MediaId><![CDATA[media_id]]></MediaId>
+		<ThumbMediaId><![CDATA[thumb_media_id]]></ThumbMediaId>
+	</xml>
+
+
+	接收语音消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1357290913</CreateTime>
+		<MsgType><![CDATA[voice]]></MsgType>
+		
+		<MsgId>1234567890123456</MsgId>
+		<MediaId><![CDATA[media_id]]></MediaId>
+		<Format><![CDATA[Format]]></Format>
+	</xml>
+
+
+	接收语音识别结果，与 Voice 唯一的不同是多了一个 Recognition 标记
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1357290913</CreateTime>
+		<MsgType><![CDATA[voice]]></MsgType>
+		<MediaId><![CDATA[media_id]]></MediaId>
+		<Format><![CDATA[Format]]></Format>
+		<Recognition><![CDATA[腾讯微信团队]]></Recognition>
+		<MsgId>1234567890123456</MsgId>
+	</xml>
+
+
+	接收链接消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1351776360</CreateTime>
+		<MsgType><![CDATA[link]]></MsgType>
+		<MsgId>1234567890123456</MsgId>
+		
+		<Title><![CDATA[公众平台官网链接]]></Title>
+		<Description><![CDATA[公众平台官网链接]]></Description>
+		<Url><![CDATA[url]]></Url>
+	</xml>
+
+
+	接收地理位置消息
+	<xml>
+		<ToUserName><![CDATA[toUser]]></ToUserName>
+		<FromUserName><![CDATA[fromUser]]></FromUserName>
+		<CreateTime>1351776360</CreateTime>
+		<MsgType><![CDATA[location]]></MsgType>
+		<MsgId>1234567890123456</MsgId>
+		
+		<Location_X>23.134521</Location_X>
+		<Location_Y>113.358803</Location_Y>
+		<Scale>20</Scale>
+		<Label><![CDATA[位置信息]]></Label>
+	</xml>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
