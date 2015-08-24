@@ -1,8 +1,8 @@
 package com.codeyn.wechat.sdk.material.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class MaterialList extends WxResult{
+public class MaterialList extends WcResult{
     
     private Integer total_count;
     private Integer item_count;

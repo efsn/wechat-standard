@@ -1,12 +1,12 @@
 package com.codeyn.wechat.sdk.msg.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
 /**
  * @author Arthur
  *
  */
-public class MsgResult extends WxResult {
+public class MsgResult extends WcResult {
     
     /**
      * 群发成功后返回的消息ID

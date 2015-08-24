@@ -10,22 +10,24 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.codeyn.base.exception.DefaultStatus;
+import com.codeyn.base.result.ResultHelper;
+import com.codeyn.wechat.jfinal.base.WcJFinalBaseController;
 import com.codeyn.wechat.jfinal.interceptor.AuthenticationInterceptor.VerifyLogin;
-import com.codeyn.wechat.sdk.user.result.WxUser;
+import com.codeyn.wechat.system.model.WcConfig;
+import com.codeyn.wechat.system.service.WcConfigService;
 import com.codeyn.wechat.utils.FrontUtil;
-import com.codeyn.wechat.utils.WeixinUtil;
+import com.codeyn.wechat.utils.WcUtil;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.sqq.common.exception.DefaultStatus;
-import com.sqq.common.result.ResultHelper;
 
 /**
  * 微信用户检测拦截器
  * 
- * @author parcel
+ * @author Arthur
  * 
  */
-public class WxUserCheckInterceptor implements Interceptor {
+public class WcUserCheckInterceptor implements Interceptor {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -41,7 +43,7 @@ public class WxUserCheckInterceptor implements Interceptor {
 		}
 
 		// 验证用户是否已经获取到openId
-		WxJFinalBaseController wxJFinalBaseController = (WxJFinalBaseController) ai.getController();
+		WcJFinalBaseController wxJFinalBaseController = (WcJFinalBaseController) ai.getController();
 		if (wxJFinalBaseController.getOpenId() != null) {
 			ai.invoke();
 			return;
@@ -55,32 +57,31 @@ public class WxUserCheckInterceptor implements Interceptor {
 		}
 
 		// 从微信服务器获取当前广场openId
-		WxConfig wxConfig = WxConfigService.getConfigByTenantId(wxJFinalBaseController.getTenantId());
+		WcConfig wxConfig = WcConfigService.getConfigByTenantId("");
 		if (StringUtils.isBlank(wxJFinalBaseController.getPara("code"))) {
 
 			// 拼装认证报文-发送获取code重定向请求
-			String redirectUrl = WeixinUtil.encaAuthorizeUrl(wxConfig.getStr("app_id"), wxJFinalBaseController);
+			String redirectUrl = WcUtil.encaAuthorizeUrl(wxConfig.getStr("app_id"), wxJFinalBaseController);
 			wxJFinalBaseController.redirect(redirectUrl.toString());
 			return;
 		}
 
 		// 获取到code后从微信服务器获取openId
-		String openId = WeixinUtil.getOpenId(wxConfig, wxJFinalBaseController.getPara("code"));
+		String openId = WcUtil.getOpenId(wxConfig, wxJFinalBaseController.getPara("code"));
 		
 		// 将openId放入session
         wxJFinalBaseController.getSession().setAttribute("openId", openId);
 
 		// 获取当前广场openId对应的用户
-		String tenantId = wxJFinalBaseController.getTenantId();
-		WxUser wxUser = WxUserService.getWxUserByOpenIdAndSource(tenantId, openId, WxUserSource.wx.getValue());
+//		WxUser wxUser = ;
 
 		// 若会员已存在，则自动登陆用户
-		if (wxUser == null) {
-		    wxJFinalBaseController.redirect("/toRegister?sourceUrl=" + WeixinUtil.getSourceUrl(wxJFinalBaseController));
-		    return;
-		}
-		
-		wxJFinalBaseController.getSession().setAttribute("memberId", wxUser.getStr("member_id"));
+//		if (wxUser == null) {
+//		    wxJFinalBaseController.redirect("/toRegister?sourceUrl=" + WcUtil.getSourceUrl(wxJFinalBaseController));
+//		    return;
+//		}
+//		
+//		wxJFinalBaseController.getSession().setAttribute("memberId", wxUser.getStr("member_id"));
 		ai.invoke();
 	}
 

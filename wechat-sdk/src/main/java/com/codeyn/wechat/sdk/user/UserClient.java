@@ -4,27 +4,27 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 import com.codeyn.wechat.sdk.user.result.UserInfoList;
-import com.codeyn.wechat.sdk.user.result.WxFollowUser;
-import com.codeyn.wechat.sdk.user.result.WxUser;
+import com.codeyn.wechat.sdk.user.result.WcFollowUser;
+import com.codeyn.wechat.sdk.user.result.WcUser;
 
 /**
  * 微信用户管理
  */
-public class UserClient extends WxClient{
+public class UserClient extends WcClient{
 	
-	public UserClient(WxBase wxBase) {
+	public UserClient(WcBase wxBase) {
         super(wxBase);
     }
 
     /**
      * 获取用户基本信息
      */
-	public WxUser getUserInfo( final String accessToken, final String openId, final String language) {
-	    return doGet(WxUser.class, new ParamService(){
+	public WcUser getUserInfo( final String accessToken, final String openId, final String language) {
+	    return doGet(WcUser.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {
@@ -61,8 +61,8 @@ public class UserClient extends WxClient{
 	/**
 	 * 设置备注名
 	 */
-	public WxResult updateRemark(String accessToken, final String openId ,final String remark) {
-	    return doPost(WxResult.class, new ParamService(){
+	public WcResult updateRemark(String accessToken, final String openId ,final String remark) {
+	    return doPost(WcResult.class, new ParamService(){
 	        
 	        @Override
 	        public void init(Map<String, String> map) {
@@ -80,8 +80,8 @@ public class UserClient extends WxClient{
 	 * 
 	 * @param nextOpenId 第一个拉取的OPENID，不填默认从头开始拉取
 	 */
-	public WxFollowUser getUserInfo( final String accessToken, final String nextOpenId) {
-        return doGet(WxFollowUser.class, new ParamService(){
+	public WcFollowUser getUserInfo( final String accessToken, final String nextOpenId) {
+        return doGet(WcFollowUser.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {

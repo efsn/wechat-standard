@@ -3,9 +3,9 @@ package com.codeyn.wechat.sdk.msg;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 import com.codeyn.wechat.sdk.msg.enums.MsgType;
 import com.codeyn.wechat.sdk.msg.result.CustomerService;
 
@@ -13,14 +13,14 @@ import com.codeyn.wechat.sdk.msg.result.CustomerService;
  * 多客服功能</br> 
  * 必须先在公众平台官网为公众号设置微信号后才能使用该能力
  */
-public class CustomerServiceClient extends WxClient{
+public class CustomerServiceClient extends WcClient{
     
-    public CustomerServiceClient(WxBase wxBase) {
+    public CustomerServiceClient(WcBase wxBase) {
         super(wxBase);
     }
 
-    public WxResult saveAccount(String accessToken, boolean isNew, final String account, final String name, final String pw){
-        return doPost(WxResult.class, new ParamService() {
+    public WcResult saveAccount(String accessToken, boolean isNew, final String account, final String name, final String pw){
+        return doPost(WcResult.class, new ParamService() {
             
             @Override
             public void init(Map<String, String> map) {
@@ -38,8 +38,8 @@ public class CustomerServiceClient extends WxClient{
      * 删除客服帐号
      * 避免@被encoding
      */
-    public WxResult deleteAccount(final String accessToken, String account){
-        return doGet(WxResult.class, new ParamService() {
+    public WcResult deleteAccount(final String accessToken, String account){
+        return doGet(WcResult.class, new ParamService() {
             
             @Override
             public void init(Map<String, String> map) {
@@ -66,8 +66,8 @@ public class CustomerServiceClient extends WxClient{
     /**
      * 发送客服消息
      */
-    public WxResult sendMsg(String accessToken, final String toUser, final MsgType type, final Map<String, Object> data){
-        return doPost(WxResult.class, new ParamService() {
+    public WcResult sendMsg(String accessToken, final String toUser, final MsgType type, final Map<String, Object> data){
+        return doPost(WcResult.class, new ParamService() {
             
             @Override
             public void init(Map<String, String> map) {
@@ -89,8 +89,8 @@ public class CustomerServiceClient extends WxClient{
     /**
      * 获取客服聊天记录
      */
-    public WxResult getChatRecords(String accessToken, final String json) {
-        return doPost(WxResult.class, new ParamService() {
+    public WcResult getChatRecords(String accessToken, final String json) {
+        return doPost(WcResult.class, new ParamService() {
             
             @Override
             public void init(Map<String, String> map) {

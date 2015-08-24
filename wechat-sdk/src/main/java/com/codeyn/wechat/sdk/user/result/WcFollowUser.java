@@ -1,9 +1,9 @@
 package com.codeyn.wechat.sdk.user.result;
 
 import com.alibaba.fastjson.JSONObject;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class WxFollowUser extends WxResult{
+public class WcFollowUser extends WcResult{
     
     /**
      * 关注该公众账号的总用户数

@@ -2,25 +2,25 @@ package com.codeyn.wechat.sdk.security;
 
 import java.util.Map;
 
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
 
 /**
  * 获取微信服务器IP地址
  */
-public class CallbackIpClient extends WxClient{
+public class CallbackIpClient extends WcClient{
     
-	public CallbackIpClient(WxBase wxBase) {
+	public CallbackIpClient(WcBase wxBase) {
         super(wxBase);
     }
 
 	/**
 	 * 获取微信服务器IP地址
 	 */
-	public WxResult getCallbackIp(final String accessToken) {
-	    return doGet(WxResult.class, new ParamService(){
+	public WcResult getCallbackIp(final String accessToken) {
+	    return doGet(WcResult.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {

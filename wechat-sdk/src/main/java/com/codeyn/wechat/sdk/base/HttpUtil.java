@@ -30,7 +30,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 
 /**
  * 
@@ -54,7 +54,7 @@ public class HttpUtil {
     }
 
     public static String readUrl(String url) {
-        return readUrl(url, WxClientFactory.getGlobalConnectTimeOut(), WxClientFactory.getGlobalReadTimeout());
+        return readUrl(url, WcClientFactory.getGlobalConnectTimeOut(), WcClientFactory.getGlobalReadTimeout());
     }
 
     public static String readUrl(String url, int connectTimeout, int readTimeout) {
@@ -64,7 +64,7 @@ public class HttpUtil {
             conn.setReadTimeout(readTimeout);
             StringBuilder sb = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),
-                    WxBase.ENCODING))) {
+                    WcBase.ENCODING))) {
                 String line;
                 while ((line = reader.readLine()) != null)
                     sb.append(line);
@@ -179,7 +179,7 @@ public class HttpUtil {
             conn.connect();
 
             OutputStream out = conn.getOutputStream();
-            out.write(data.getBytes(WxBase.ENCODING));
+            out.write(data.getBytes(WcBase.ENCODING));
             out.flush();
             out.close();
 
@@ -215,7 +215,7 @@ public class HttpUtil {
         InputStream inputStream = null;
         try {
             inputStream = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, WxBase.ENCODING));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, WcBase.ENCODING));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");
@@ -296,7 +296,7 @@ public class HttpUtil {
             String value = entry.getValue();
             if (StringUtils.isNotBlank(value))
                 try {
-                    value = URLEncoder.encode(value, WxBase.ENCODING);
+                    value = URLEncoder.encode(value, WcBase.ENCODING);
                 } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }

@@ -1,8 +1,8 @@
 package com.codeyn.wechat.sdk.msg.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class TemplateMsgResult extends WxResult{
+public class TemplateMsgResult extends WcResult{
 	
     /**
      * 模版Id

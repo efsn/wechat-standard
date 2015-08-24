@@ -5,22 +5,22 @@ import java.lang.reflect.Constructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 
 /**
  * @author Arthur
  */
-public class WxClientFactory {
+public class WcClientFactory {
 
-	private static Logger logger = LoggerFactory.getLogger(WxClientFactory.class);
+	private static Logger logger = LoggerFactory.getLogger(WcClientFactory.class);
 
 	private static int GLOBAL_CONNECT_TIMEOUT = 1000;
 
 	private static int GLOBAL_READ_TIMEOUT = 5000;
 
-	public static <T extends WxClient> T getClient(Class<T> clazz, WxBase wxBase) {
+	public static <T extends WcClient> T getClient(Class<T> clazz, WcBase wxBase) {
 		try {
-			Constructor<T> constructor = clazz.getConstructor(WxBase.class);
+			Constructor<T> constructor = clazz.getConstructor(WcBase.class);
 			return constructor.newInstance(wxBase);
 		} catch (Exception e) {
 			logger.error("Class name: " + clazz.getName(), e);

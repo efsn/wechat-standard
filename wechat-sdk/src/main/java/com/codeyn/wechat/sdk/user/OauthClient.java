@@ -2,17 +2,17 @@ package com.codeyn.wechat.sdk.user;
 
 import java.util.Map;
 
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 import com.codeyn.wechat.sdk.user.result.OauthAccessToken;
-import com.codeyn.wechat.sdk.user.result.WxUser;
+import com.codeyn.wechat.sdk.user.result.WcUser;
 
 /**
  * 网页授权获取用户基本信息
  * @author Arthur
  */
-public class OauthClient extends WxClient{
+public class OauthClient extends WcClient{
     
     /**
      * 不弹出授权页面，直接跳转，只能获取用户openid
@@ -24,7 +24,7 @@ public class OauthClient extends WxClient{
      */
     public static final String SCOPE_USER_INFO = "snsapi_userinfo";
     
-    public OauthClient(WxBase wxBase) {
+    public OauthClient(WcBase wxBase) {
         super(wxBase);
     }
     
@@ -47,8 +47,8 @@ public class OauthClient extends WxClient{
      * 拉取用户信息(需scope为 snsapi_userinfo)
      * @param language zh_CN 简体，zh_TW 繁体，en 英语
      */
-    public WxUser getUserInfo(final String oauthAccessToken, final String openId, final String language) {
-        return doGet(WxUser.class, new ParamService(){
+    public WcUser getUserInfo(final String oauthAccessToken, final String openId, final String language) {
+        return doGet(WcUser.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {
@@ -63,8 +63,8 @@ public class OauthClient extends WxClient{
     /**
      * 检验授权凭证oauthAccessToken是否有效
      */
-    public WxResult isOauthValid(final String oauthAccessToken, final String openId) {
-        return doGet(WxResult.class, new ParamService(){
+    public WcResult isOauthValid(final String oauthAccessToken, final String openId) {
+        return doGet(WcResult.class, new ParamService(){
             
             @Override
             public void init(Map<String, String> map) {

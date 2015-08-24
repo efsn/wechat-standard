@@ -6,8 +6,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.encrypt.WxBizMsgCrypt;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.encrypt.WcBizMsgCrypt;
 
 /**
  * 对微信平台官方给出的加密解析代码进行再次封装
@@ -31,9 +31,9 @@ public class MsgEncryptUtil {
 	
 	private static final String format = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[%1$s]]></Encrypt></xml>";
 	
-	public static String encrypt(WxBase wb, String msg, String timestamp, String nonce) {
+	public static String encrypt(WcBase wb, String msg, String timestamp, String nonce) {
 		try {
-			WxBizMsgCrypt pc = new WxBizMsgCrypt(wb.getToken(), wb.getEncodingAesKey(), wb.getAppId());
+			WcBizMsgCrypt pc = new WcBizMsgCrypt(wb.getToken(), wb.getEncodingAesKey(), wb.getAppId());
 			return pc.encryptMsg(msg, timestamp, nonce);
 		}
 		catch (Exception e) {
@@ -42,7 +42,7 @@ public class MsgEncryptUtil {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String decrypt(WxBase wb, String encryptedMsg, String timestamp, String nonce, String msgSignature) {
+	public static String decrypt(WcBase wb, String encryptedMsg, String timestamp, String nonce, String msgSignature) {
 		try {
 		    Document document = DocumentHelper.parseText(encryptedMsg);
 			Element root = document.getRootElement();
@@ -53,7 +53,7 @@ public class MsgEncryptUtil {
 			if (encodingAesKey == null)
 				throw new IllegalStateException("encodingAesKey can not be null, config encodingAesKey first.");
 			
-			WxBizMsgCrypt pc = new WxBizMsgCrypt(wb.getToken(), encodingAesKey, wb.getAppId());
+			WcBizMsgCrypt pc = new WcBizMsgCrypt(wb.getToken(), encodingAesKey, wb.getAppId());
 			
 			// 此处 timestamp 如果与加密前的不同则报签名不正确的异常
 			return pc.decryptMsg(msgSignature, timestamp, nonce, fromXML);

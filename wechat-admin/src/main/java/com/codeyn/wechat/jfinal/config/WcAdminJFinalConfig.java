@@ -45,8 +45,6 @@ public class WcAdminJFinalConfig extends BaseConfig {
         packages.add("com.codeyn.wechat.*.model");
         arpBuilder.mapping(packages.toArray(new String[packages.size()]));
         addArp(arpBuilder.build());
-
-        loadPropertyFile("datasource.properties");
     }
 
     @Override

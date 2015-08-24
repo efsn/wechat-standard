@@ -38,7 +38,7 @@ import org.apache.commons.codec.binary.Base64;
  * 	<li>如果安装了JDK，将两个jar文件放到%JDK_HOME%\jre\lib\security目录下覆盖原来文件</li>
  * </ol>
  */
-public class WxBizMsgCrypt {
+public class WcBizMsgCrypt {
 	static Charset CHARSET = Charset.forName("utf-8");
 	Base64 base64 = new Base64();
 	byte[] aesKey;
@@ -53,7 +53,7 @@ public class WxBizMsgCrypt {
 	 * 
 	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
 	 */
-	public WxBizMsgCrypt(String token, String encodingAesKey, String appId) throws AesException {
+	public WcBizMsgCrypt(String token, String encodingAesKey, String appId) throws AesException {
 		if (encodingAesKey.length() != 43) {
 			throw new AesException(AesException.IllegalAesKey);
 		}

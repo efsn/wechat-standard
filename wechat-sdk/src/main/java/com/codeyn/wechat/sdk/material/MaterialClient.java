@@ -14,9 +14,9 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 import com.codeyn.wechat.sdk.material.enums.MediaType;
 import com.codeyn.wechat.sdk.material.result.MaterialCount;
 import com.codeyn.wechat.sdk.material.result.Media;
@@ -37,23 +37,23 @@ import com.codeyn.wechat.sdk.msg.result.Article;
  * @author Arthur
  *
  */
-public class MaterialClient extends WxClient {
+public class MaterialClient extends WcClient {
 
-    public MaterialClient(WxBase wxBase) {
+    public MaterialClient(WcBase wxBase) {
         super(wxBase);
     }
 
     /**
      * 上传图文消息内的图片获取URL 图片仅支持jpg/png格式，大小必须在1MB以下
      */
-    public Media uploadImg(String accessToken, File file) {
+    public Media uploadNewsImg(String accessToken, File file) {
         StringBuffer urlStr = new StringBuffer(getWxBase().getHost()).append("/cgi-bin/media/uploadimg?access_token=")
                 .append(accessToken);
         return upload(urlStr.toString(), file);
     }
 
     /**
-     * 上传永久图文消息素材 图文消息，一个图文消息支持1到10条图文
+     * 上传永久图文消息素材（一个图文消息支持1到10条图文）
      */
     public Media uploadNews(String accessToken, final String json) {
         return doPost(Media.class, new ParamService() {
@@ -79,12 +79,23 @@ public class MaterialClient extends WxClient {
     }
 
     /**
+     * 永久素材
+     * @param type 只支持 image，voice，video，thumb
+     */
+    public Media uploadAbidingMedia(MediaType type, File file, String accessToken) {
+        StringBuffer urlStr = new StringBuffer(getWxBase().getHost())
+                .append("/cgi-bin/material/add_material?access_token=").append(accessToken).append("&type=")
+                .append(type.getFlag());
+        return upload(urlStr.toString(), file);
+    }
+
+    /**
      * 上传临时素材到腾讯服务器
      * 
      * @param type
      *            目前腾讯type 只支持 image，voice，video，thumb
      */
-    public Media upload(String urlStr, File file) {
+    private Media upload(String urlStr, File file) {
         String res = "";
         HttpURLConnection conn = null;
         String boundary = "---------------------------123821742118716";
@@ -102,7 +113,7 @@ public class MaterialClient extends WxClient {
             conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
             OutputStream out = new DataOutputStream(conn.getOutputStream());
             StringBuffer strBuf = new StringBuffer();
-            strBuf.append("\r\n--").append(boundary).append("--\r\n");
+            strBuf.append("\r\n--").append(boundary).append("\r\n");
             strBuf.append("Content-Disposition: form-data;filename=\"" + file.getName() + "\"\r\n");
             strBuf.append("Content-Type:application/octet-stream\r\n\r\n");
             out.write(strBuf.toString().getBytes());
@@ -204,8 +215,7 @@ public class MaterialClient extends WxClient {
      */
     public Media addOtherMaterial(String accessToken, File file, MediaType type) {
         StringBuffer urlStr = new StringBuffer(getWxBase().getHost())
-                .append("/cgi-bin/material/add_material?access_token=")
-                .append(accessToken).append("&type=")
+                .append("/cgi-bin/material/add_material?access_token=").append(accessToken).append("&type=")
                 .append(type.getFlag());
         return upload(urlStr.toString(), file);
     }
@@ -258,8 +268,8 @@ public class MaterialClient extends WxClient {
     /**
      * 删除永久素材
      */
-    public WxResult deleteMaterial(String accessToken, final String mediaId) {
-        return doPost(WxResult.class, new ParamService() {
+    public WcResult deleteMaterial(String accessToken, final String mediaId) {
+        return doPost(WcResult.class, new ParamService() {
 
             @Override
             public void init(Map<String, String> map) {
@@ -274,8 +284,8 @@ public class MaterialClient extends WxClient {
     /**
      * 修改永久图文素材
      */
-    public WxResult updateNews(String accessToken, final String mediaId, final Integer index, final Article article) {
-        return doPost(WxResult.class, new ParamService() {
+    public WcResult updateNews(String accessToken, final String mediaId, final Integer index, final Article article) {
+        return doPost(WcResult.class, new ParamService() {
 
             @Override
             public void init(Map<String, String> map) {
@@ -304,16 +314,15 @@ public class MaterialClient extends WxClient {
     }
 
     /**
-     * 分类型获取永久图文素材的列表
+     * 分类型获取永久图文素材列表
      */
-    public NewsList getNewsList(String accessToken, String accesstoken, final String type, final Integer offset,
-            final Integer count) {
+    public NewsList getNewsList(String accessToken, final Integer offset, final Integer count) {
         return doPost(NewsList.class, new ParamService() {
 
             @Override
             public void init(Map<String, String> map) {
                 JSONObject json = new JSONObject();
-                json.put("type", type);
+                json.put("type", "news");
                 json.put("offset", offset);
                 json.put("count", count);
                 map.put(KEY, json.toJSONString());

@@ -1,13 +1,13 @@
 package com.codeyn.wechat.sdk.material.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
 /**
  * 视频消息素材
  * @author Arthur
  *
  */
-public class Video extends WxResult{
+public class Video extends WcResult{
 
     private String title;
     

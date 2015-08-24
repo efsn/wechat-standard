@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.codeyn.wechat.jfinal.base.MsgController;
 import com.codeyn.wechat.sdk.utils.SignatureCheckUtil;
-import com.codeyn.wechat.utils.WxCache;
+import com.codeyn.wechat.wc.utils.WcCache;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -57,7 +57,7 @@ public class MsgInterceptor implements Interceptor {
 			return false;
 		}
 		
-		if (SignatureCheckUtil.checkSignature(WxCache.getWxBase("").getToken(), signature, timestamp, nonce)) {
+		if (SignatureCheckUtil.checkSignature(WcCache.getWxBase("").getToken(), signature, timestamp, nonce)) {
 			return true;
 		} else {
 			logger.error("check signature failure: " +
@@ -87,7 +87,7 @@ public class MsgInterceptor implements Interceptor {
         String timestamp = c.getPara("timestamp");
         String nonce = c.getPara("nonce");
         
-		boolean isOk = SignatureCheckUtil.checkSignature(WxCache.getWxBase("").getToken(), signature, timestamp, nonce);
+		boolean isOk = SignatureCheckUtil.checkSignature(WcCache.getWxBase("").getToken(), signature, timestamp, nonce);
 		if (isOk)
 			c.renderText(echostr);
 		else

@@ -2,17 +2,17 @@ package com.codeyn.wechat.sdk.menu;
 
 import java.util.Map;
 
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 import com.codeyn.wechat.sdk.menu.result.Menu;
 
 /**
  * @author Arthur
  */
-public class MenuClient extends WxClient{
+public class MenuClient extends WcClient{
 
-    public MenuClient(WxBase wxBase) {
+    public MenuClient(WcBase wxBase) {
         super(wxBase);
     }
 
@@ -20,7 +20,7 @@ public class MenuClient extends WxClient{
      * 查询菜单
      */
     public Menu getMenu(final String accessToken) {
-        return doGet(Menu.class, new ParamService(){
+        return doGet("menu", Menu.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {
@@ -33,8 +33,8 @@ public class MenuClient extends WxClient{
     /**
      * 创建菜单
      */
-    public WxResult createMenu(String accessToken, final String jsonStr) {
-        return doPost(WxResult.class, new ParamService(){
+    public WcResult createMenu(String accessToken, final String jsonStr) {
+        return doPost(WcResult.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {
@@ -47,8 +47,8 @@ public class MenuClient extends WxClient{
     /**
      * 删除菜单
      */
-    public WxResult deleteMenu(final String accessToken) {
-        return doGet(WxResult.class, new ParamService(){
+    public WcResult deleteMenu(final String accessToken) {
+        return doGet(WcResult.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {

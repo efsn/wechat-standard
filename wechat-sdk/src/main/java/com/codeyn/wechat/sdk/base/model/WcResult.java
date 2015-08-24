@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSONObject;
  * @author Arthur
  *
  */
-public class WxResult {
+public class WcResult {
     
 	private Integer errcode;
 	private String errmsg = "SUCCESS";

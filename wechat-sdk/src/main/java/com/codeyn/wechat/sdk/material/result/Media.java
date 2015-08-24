@@ -2,8 +2,6 @@ package com.codeyn.wechat.sdk.material.result;
 
 import com.codeyn.wechat.sdk.msg.result.MsgResult;
 
-
-
 /**
  * 媒体文件
  * 图片（image）、语音（voice）、视频（video）和缩略图（thumb）news图文消息

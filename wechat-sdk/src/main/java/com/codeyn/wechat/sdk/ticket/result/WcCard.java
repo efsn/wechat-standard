@@ -1,8 +1,8 @@
 package com.codeyn.wechat.sdk.ticket.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class WxCard extends WxResult{
+public class WcCard extends WcResult{
 
     private String ticket;
 

@@ -7,18 +7,18 @@ import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 import com.codeyn.wechat.sdk.msg.result.MsgResult;
 
 /**
  * @author Arthur
  *
  */
-public class MassClient extends WxClient {
+public class MassClient extends WcClient {
 
-    public MassClient(WxBase wxBase) {
+    public MassClient(WcBase wxBase) {
         super(wxBase);
     }
     
@@ -84,8 +84,8 @@ public class MassClient extends WxClient {
      * 3、删除群发消息只能删除图文消息和视频消息，其他类型的消息一经发送，无法删除
      * 4、如果多次群发发送的是一个图文消息，那么删除其中一次群发，就会删除掉这个图文消息并导致所有群发都失效
      */
-    public WxResult deleteMass(String accessToken, final String msgId){
-        return doPost(WxResult.class, new ParamService() {
+    public WcResult deleteMass(String accessToken, final String msgId){
+        return doPost(WcResult.class, new ParamService() {
             
             @Override
             public void init(Map<String, String> map) {

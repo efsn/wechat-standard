@@ -2,17 +2,16 @@ package com.codeyn.wechat.sdk.msg.result;
 
 import java.util.List;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
-import com.codeyn.wechat.sdk.material.result.Media;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
 /**
  * 图文消息
  * @author Arthur
  *
  */
-public class Article extends WxResult{
+public class Article extends WcResult{
 
-    private List<Media> news_item;
+    private List<Article> news_item;
     
     /**
      * 图文消息的作者
@@ -118,11 +117,11 @@ public class Article extends WxResult{
         this.url = url;
     }
 
-    public List<Media> getNews() {
+    public List<Article> getNews_item() {
         return news_item;
     }
 
-    public void setNews_item(List<Media> news_item) {
+    public void setNews_item(List<Article> news_item) {
         this.news_item = news_item;
     }
     

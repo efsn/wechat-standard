@@ -8,7 +8,7 @@ import com.codeyn.wechat.sdk.base.enums.EncryptType;
  * 微信基本参数
  * @author Arthur
  */
-public class WxBase {
+public class WcBase {
 	
     public static final String ENCODING = "UTF-8";
     
@@ -38,21 +38,21 @@ public class WxBase {
 	private String originId;
 	private String domain;
 	
-	public WxBase() {
+	public WcBase() {
 		
 	}
 	
-	public WxBase(String token) {
+	public WcBase(String token) {
 		setToken(token);
 	}
 	
-	public WxBase(String token, String appId, String appSecret) {
+	public WcBase(String token, String appId, String appSecret) {
 		setToken(token);
 		setAppId(appId);
 		setAppSecret(appSecret);
 	}
 	
-	public WxBase(String wxNo,
+	public WcBase(String wxNo,
                   String name,
                   String token,
                   String domain,

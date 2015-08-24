@@ -1,8 +1,8 @@
 package com.codeyn.wechat.sdk.account.model;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class Qrcode extends WxResult{
+public class Qrcode extends WcResult{
 
     /**
      * 凭借此ticket可以在有效时间内换取二维码

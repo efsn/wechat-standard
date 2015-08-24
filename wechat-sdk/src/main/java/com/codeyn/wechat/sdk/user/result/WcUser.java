@@ -1,8 +1,8 @@
 package com.codeyn.wechat.sdk.user.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class WxUser extends WxResult{
+public class WcUser extends WcResult{
 
     /**
      * 用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息

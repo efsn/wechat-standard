@@ -2,14 +2,14 @@ package com.codeyn.wechat.sdk.user.result;
 
 import java.util.List;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class WxUserGroup extends WxResult{
+public class WcUserGroup extends WcResult{
 
     /**
      * 所有分组
      */
-    private List<WxUserGroup> groups;
+    private List<WcUserGroup> groups;
     
     /**
      * 用户所属的groupid
@@ -58,11 +58,11 @@ public class WxUserGroup extends WxResult{
         this.count = count;
     }
 
-    public List<WxUserGroup> getGroups() {
+    public List<WcUserGroup> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<WxUserGroup> groups) {
+    public void setGroups(List<WcUserGroup> groups) {
         this.groups = groups;
     }
 

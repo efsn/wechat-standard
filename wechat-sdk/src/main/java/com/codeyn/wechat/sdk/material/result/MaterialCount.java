@@ -1,13 +1,13 @@
 package com.codeyn.wechat.sdk.material.result;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
 /**
  * 获取素材总数
  * @author Arthur
  *
  */
-public class MaterialCount extends WxResult{
+public class MaterialCount extends WcResult{
 
     /**
      * 语音总数量

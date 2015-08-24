@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5">
+
+	<display-name>wechat-standard-admin</display-name>
+
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>com.sqq.jfinal.base.CharSetFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 全局访问日志+异常拦截 -->
+	<filter>
+		<filter-name>webLogFilter</filter-name>
+		<filter-class>com.codeyn.base.log.WebLogFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>webLogFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>jfinal</filter-name>
+		<filter-class>com.jfinal.core.JFinalFilter</filter-class>
+		<init-param>
+			<param-name>configClass</param-name>
+			<param-value>com.codeyn.wechat.jfinal.config.WcAdminJFinalConfig</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>jfinal</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/403.html</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	
+</web-app>

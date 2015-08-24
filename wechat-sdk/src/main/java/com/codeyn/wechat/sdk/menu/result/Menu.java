@@ -2,12 +2,10 @@ package com.codeyn.wechat.sdk.menu.result;
 
 import java.util.List;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class Menu extends WxResult{
+public class Menu extends WcResult{
 
-    private Menu menu;
-    
     /**
      * 一级菜单数组，个数应为1~3个
      */
@@ -99,15 +97,22 @@ public class Menu extends WxResult{
         this.media_id = media_id;
     }
     
-    /**
-     * 从该方法获取菜单
-     */
-    public Menu getMenu() {
-        return menu;
-    }
+    public String getValue(){
+        if(type == null) return null;
+        switch (type) {
+            case "view" :
+                return url;
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+            case "click" :
+                return key;
+
+            case "media_id" :
+            case "view_limited" :
+                return media_id;
+
+            default :
+                return null;
+        }
     }
     
 }

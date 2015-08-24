@@ -2,21 +2,21 @@ package com.codeyn.wechat.sdk.ticket;
 
 import java.util.Map;
 
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.ticket.result.WxCard;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.ticket.result.WcCard;
 
 /**
  * 微信卡券接口签名凭证api_ticket
  */
-public class JsTicketClient extends WxClient{
+public class JsTicketClient extends WcClient{
     
-    public JsTicketClient(WxBase wxBase) {
+    public JsTicketClient(WcBase wxBase) {
         super(wxBase);
     }
 
-    public WxCard getTicket(final String accessToken) {
-        return doGet(WxCard.class, new ParamService(){
+    public WcCard getTicket(final String accessToken) {
+        return doGet(WcCard.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {

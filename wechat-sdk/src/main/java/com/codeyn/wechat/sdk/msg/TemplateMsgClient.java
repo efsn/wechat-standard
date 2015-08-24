@@ -3,8 +3,8 @@ package com.codeyn.wechat.sdk.msg;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 import com.codeyn.wechat.sdk.msg.result.TemplateMsgResult;
 
 
@@ -12,9 +12,9 @@ import com.codeyn.wechat.sdk.msg.result.TemplateMsgResult;
  * 模板消息
  * @author Arthur
  */
-public class TemplateMsgClient extends WxClient{
+public class TemplateMsgClient extends WcClient{
 	
-	public TemplateMsgClient(WxBase wxBase) {
+	public TemplateMsgClient(WcBase wxBase) {
         super(wxBase);
     }
 

@@ -6,16 +6,16 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
 import com.codeyn.wechat.sdk.account.model.Qrcode;
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
 /**
  * 生成带参数的二维码
  */
-public class QrcodeClient extends WxClient{
+public class QrcodeClient extends WcClient{
     
-    public QrcodeClient(WxBase wxBase) {
+    public QrcodeClient(WcBase wxBase) {
         super(wxBase);
     }
 
@@ -51,8 +51,8 @@ public class QrcodeClient extends WxClient{
     /**
      * 获取二维码
      */
-    public WxResult showQrcode(final String ticket) {
-        return doService(WxResult.class, new ParamService(){
+    public WcResult showQrcode(final String ticket) {
+        return doService(WcResult.class, new ParamService(){
 
             @Override
             public void init(Map<String, String> map) {

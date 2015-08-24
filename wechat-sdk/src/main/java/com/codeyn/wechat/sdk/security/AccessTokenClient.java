@@ -2,14 +2,14 @@ package com.codeyn.wechat.sdk.security;
 
 import java.util.Map;
 
-import com.codeyn.wechat.sdk.base.WxClient;
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.base.common.Assert;
+import com.codeyn.wechat.sdk.base.WcClient;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 import com.codeyn.wechat.sdk.security.result.AccessToken;
-import com.sqq.common.lang.SqqAssert;
 
-public class AccessTokenClient extends WxClient {
+public class AccessTokenClient extends WcClient {
 	
-	public AccessTokenClient(WxBase wxBase) {
+	public AccessTokenClient(WcBase wxBase) {
         super(wxBase);
     }
 
@@ -24,7 +24,7 @@ public class AccessTokenClient extends WxClient {
 			    break;
 			}
 		}
-		SqqAssert.notNull(result, "AccessToken");
+		Assert.notNull(result, "AccessToken");
 		return result;
 	}
 	

@@ -9,7 +9,7 @@ import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 import com.codeyn.wechat.sdk.msg.enums.MsgType;
 import com.codeyn.wechat.sdk.msg.model.receive.ReceivedMsg;
 import com.codeyn.wechat.sdk.msg.model.send.ImageMsg;
@@ -30,7 +30,7 @@ public class MsgSentBuilder {
 	
     public static String build(SentMsg msg) {
         Document dd = DocumentHelper.createDocument();
-        dd.setXMLEncoding(WxBase.ENCODING);
+        dd.setXMLEncoding(WcBase.ENCODING);
         Element root = dd.addElement("xml");
         Class<?> clazz = msg.getClass();
         Class<?> parent = clazz.getSuperclass();

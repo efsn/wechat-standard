@@ -11,7 +11,7 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 
 public class IOUtil {
 
@@ -32,7 +32,7 @@ public class IOUtil {
 
 	public static String readFile(String path) {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path)),
-				WxBase.ENCODING))) {
+				WcBase.ENCODING))) {
 			StringBuilder sb = new StringBuilder();
 			String s;
 			while ((s = br.readLine()) != null)
@@ -59,7 +59,7 @@ public class IOUtil {
 	}
 
 	public static String readFile(File f) {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), WxBase.ENCODING))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), WcBase.ENCODING))) {
 			StringBuilder sb = new StringBuilder();
 			String s;
 			while ((s = br.readLine()) != null)

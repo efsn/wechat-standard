@@ -2,9 +2,9 @@ package com.codeyn.wechat.sdk.msg.result;
 
 import java.util.List;
 
-import com.codeyn.wechat.sdk.base.model.WxResult;
+import com.codeyn.wechat.sdk.base.model.WcResult;
 
-public class CustomerService extends WxResult {
+public class CustomerService extends WcResult {
     
     private List<CustomerService> kf_list;
     

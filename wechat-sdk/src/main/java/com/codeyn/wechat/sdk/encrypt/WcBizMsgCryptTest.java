@@ -9,6 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+
 /*import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,7 +21,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-public class WxBizMsgCryptTest {
+@SuppressWarnings("unused")
+public class WcBizMsgCryptTest {
 	String encodingAesKey = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG";
 	String token = "pamtest";
 	String timestamp = "1409304348";
@@ -36,7 +38,7 @@ public class WxBizMsgCryptTest {
 
 	public void testNormal() throws ParserConfigurationException, SAXException, IOException {
 		try {
-			WxBizMsgCrypt pc = new WxBizMsgCrypt(token, encodingAesKey, appId);
+			WcBizMsgCrypt pc = new WcBizMsgCrypt(token, encodingAesKey, appId);
 			String afterEncrpt = pc.encryptMsg(replyMsg, timestamp, nonce);
 
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -54,7 +56,7 @@ public class WxBizMsgCryptTest {
 			String fromXML = String.format(xmlFormat, encrypt);
 
 			// 第三方收到公众号平台发送的消息
-			String afterDecrpt = pc.decryptMsg(msgSignature, timestamp, nonce, fromXML);
+            String afterDecrpt = pc.decryptMsg(msgSignature, timestamp, nonce, fromXML);
 			// assertEquals(replyMsg, afterDecrpt);
 		} catch (AesException e) {
 			// fail("正常流程，怎么就抛出异常了？？？？？？");
@@ -63,7 +65,7 @@ public class WxBizMsgCryptTest {
 
 	public void testAesEncrypt() {
 		try {
-			WxBizMsgCrypt pc = new WxBizMsgCrypt(token, encodingAesKey, appId);
+			WcBizMsgCrypt pc = new WcBizMsgCrypt(token, encodingAesKey, appId);
 			// assertEquals(afterAesEncrypt, pc.encrypt(randomStr, replyMsg));
 		} catch (AesException e) {
 			e.printStackTrace();
@@ -73,7 +75,7 @@ public class WxBizMsgCryptTest {
 
 	public void testAesEncrypt2() {
 		try {
-			WxBizMsgCrypt pc = new WxBizMsgCrypt(token, encodingAesKey, appId);
+			WcBizMsgCrypt pc = new WcBizMsgCrypt(token, encodingAesKey, appId);
 			// assertEquals(afterAesEncrypt2, pc.encrypt(randomStr, replyMsg2));
 
 		} catch (AesException e) {
@@ -84,7 +86,7 @@ public class WxBizMsgCryptTest {
 
 	public void testIllegalAesKey() {
 		try {
-			new WxBizMsgCrypt(token, "abcde", appId);
+			new WcBizMsgCrypt(token, "abcde", appId);
 		} catch (AesException e) {
 			// assertEquals(AesException.IllegalAesKey, e.getCode());
 			return;
@@ -95,7 +97,7 @@ public class WxBizMsgCryptTest {
 	public void testValidateSignatureError() throws ParserConfigurationException, SAXException,
 			IOException {
 		try {
-			WxBizMsgCrypt pc = new WxBizMsgCrypt(token, encodingAesKey, appId);
+			WcBizMsgCrypt pc = new WcBizMsgCrypt(token, encodingAesKey, appId);
 			String afterEncrpt = pc.encryptMsg(replyMsg, timestamp, nonce);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -117,7 +119,7 @@ public class WxBizMsgCryptTest {
 	}
 
 	public void testVerifyUrl() throws AesException {
-		WxBizMsgCrypt wxcpt = new WxBizMsgCrypt("QDG6eK",
+		WcBizMsgCrypt wxcpt = new WcBizMsgCrypt("QDG6eK",
 				"jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C", "wx5823bf96d3bd56c7");
 		String verifyMsgSig = "5c45ff5e21c57e6ad56bac8758b79b1d9ac89fd3";
 		String timeStamp = "1409659589";

@@ -1,16 +1,16 @@
 package com.codeyn.wechat.pages;
 
-import com.codeyn.base.jfinal.annos.JFinalAnnos.Route;
-import com.jfinal.core.Controller;
+import com.codeyn.jfinal.annos.JFinalAnnos.Route;
+import com.codeyn.wechat.jfinal.base.MockJFinalBaseController;
 
 /**
  * 微信接口服务模拟
  * 
- * @author parcel
+ * @author Codeyn
  * 
  */
 @Route(value = "/oauth2", viewPath = "/")
-public class WxMockController extends Controller {
+public class WcMockController extends MockJFinalBaseController {
 
 	public void access_token() {
 		if ("wxac2386f873f97f70".equals(getPara("appid"))) {

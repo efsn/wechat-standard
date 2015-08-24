@@ -27,7 +27,7 @@ public class Test {
 		String appId = "wxb11529c136998cb6";
 		String replyMsg = " 中文<xml><ToUserName><![CDATA[oia2TjjewbmiOUlr6X-1crbLOvLw]]></ToUserName><FromUserName><![CDATA[gh_7f083739789a]]></FromUserName><CreateTime>1407743423</CreateTime><MsgType><![CDATA[video]]></MsgType><Video><MediaId><![CDATA[eYJ1MbwPRJtOvIEabaxHs7TX2D-HV71s79GUxqdUkjm6Gs2Ed1KF3ulAOA9H1xG0]]></MediaId><Title><![CDATA[testCallBackReplyVideo]]></Title><Description><![CDATA[testCallBackReplyVideo]]></Description></Video></xml>";
 
-		WxBizMsgCrypt pc = new WxBizMsgCrypt(token, encodingAesKey, appId);
+		WcBizMsgCrypt pc = new WcBizMsgCrypt(token, encodingAesKey, appId);
 		String mingwen = pc.encryptMsg(replyMsg, timestamp, nonce);
 		System.out.println("加密后: " + mingwen);
 

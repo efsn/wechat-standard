@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.codeyn.wechat.sdk.base.model.WxBase;
+import com.codeyn.wechat.sdk.base.model.WcBase;
 import com.codeyn.wechat.sdk.msg.enums.MsgType;
 import com.codeyn.wechat.sdk.msg.model.receive.EventMsg;
 import com.codeyn.wechat.sdk.msg.model.receive.NormalMsg;
@@ -34,7 +34,7 @@ public class MsgReceivedParser {
 	public static ReceivedMsg parseMsg(String xml) {
         try {
             Document doc = DocumentHelper.parseText(xml);
-            doc.setXMLEncoding(WxBase.ENCODING);
+            doc.setXMLEncoding(WcBase.ENCODING);
             Element root = doc.getRootElement();
             ReceivedMsg inMsg = null;
             Class<?> clazz = null;

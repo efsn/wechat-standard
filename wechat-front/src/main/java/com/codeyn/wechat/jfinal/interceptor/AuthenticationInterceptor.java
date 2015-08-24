@@ -9,52 +9,52 @@ import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codeyn.wechat.jfinal.base.WxJFinalBaseController;
+import com.codeyn.base.exception.DefaultStatus;
+import com.codeyn.base.result.ResultHelper;
+import com.codeyn.wechat.jfinal.base.WcJFinalBaseController;
 import com.codeyn.wechat.utils.FrontUtil;
-import com.codeyn.wechat.utils.WeixinUtil;
+import com.codeyn.wechat.utils.WcUtil;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.sqq.common.exception.DefaultStatus;
-import com.sqq.common.result.ResultHelper;
 
 /**
  * 登录认证拦截器
  * 
- * @author parcel
+ * @author Arthur
  * 
  */
 public class AuthenticationInterceptor implements Interceptor {
 
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Override
-	public void intercept(Invocation ai) {
-		Method actionMethod = ai.getMethod();
-		WxJFinalBaseController wxJFinalBaseController = (WxJFinalBaseController) ai.getController();
+    @Override
+    public void intercept(Invocation ai) {
+        Method actionMethod = ai.getMethod();
+        WcJFinalBaseController wxJFinalBaseController = (WcJFinalBaseController) ai.getController();
 
-		// 判断action是否需要验证用户是否登录
-		if (!actionMethod.isAnnotationPresent(VerifyLogin.class)) {
-			ai.invoke();
-			return;
-		}
+        // 判断action是否需要验证用户是否登录
+        if (!actionMethod.isAnnotationPresent(VerifyLogin.class)) {
+            ai.invoke();
+            return;
+        }
 
-		// 验证用户是否已登录
-		if (wxJFinalBaseController.getMemberId() != null) {
-			ai.invoke();
-			return;
-		}
+        // 验证用户是否已登录
+        if (wxJFinalBaseController.getMemberId() != null) {
+            ai.invoke();
+            return;
+        }
 
-		// 页面跳转-异步请求返回错误报文|重定向到注册
-		if (FrontUtil.isAjax(wxJFinalBaseController.getRequest())) {
-			DefaultStatus defaultStatus = new DefaultStatus(801, "用户未登录");
-			wxJFinalBaseController.renderJson(ResultHelper.failResult(defaultStatus));
-		} else {
-			wxJFinalBaseController.redirect("/toRegister?sourceUrl=" + WeixinUtil.getSourceUrl(wxJFinalBaseController));
-		}
-	}
+        // 页面跳转-异步请求返回错误报文|重定向到注册
+        if (FrontUtil.isAjax(wxJFinalBaseController.getRequest())) {
+            DefaultStatus defaultStatus = new DefaultStatus(801, "用户未登录");
+            wxJFinalBaseController.renderJson(ResultHelper.failResult(defaultStatus));
+        } else {
+            wxJFinalBaseController.redirect("/toRegister?sourceUrl=" + WcUtil.getSourceUrl(wxJFinalBaseController));
+        }
+    }
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.METHOD)
-	public @interface VerifyLogin {
-	}
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface VerifyLogin {
+    }
 }
