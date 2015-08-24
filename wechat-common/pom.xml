@@ -20,6 +20,11 @@
 
 		<dependency>
 			<groupId>com.codeyn</groupId>
+			<artifactId>frame-jfinal</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.codeyn</groupId>
 			<artifactId>wechat-sdk</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>

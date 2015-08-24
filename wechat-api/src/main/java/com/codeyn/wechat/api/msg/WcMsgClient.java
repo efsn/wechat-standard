@@ -12,9 +12,9 @@ import com.codeyn.wechat.api.base.WcApiClient;
  * @author Codeyn
  *
  */
-public class WxMsgClient extends WcApiClient {
+public class WcMsgClient extends WcApiClient {
 
-	public WxMsgClient(SysBase base) {
+	public WcMsgClient(SysBase base) {
 		super(base);
 	}
 
@@ -34,7 +34,7 @@ public class WxMsgClient extends WcApiClient {
 
 	public static void main(String args[]) {
         SysBase appBase = new SysBase("http://localhost:8080", "xx");
-        WxMsgClient wxMsgClient = new WxMsgClient(appBase);
+        WcMsgClient wxMsgClient = new WcMsgClient(appBase);
 
         Map<String, Object> params1 = new HashMap<String, Object>();
         params1.put("first", "您的积分账户变更如下");

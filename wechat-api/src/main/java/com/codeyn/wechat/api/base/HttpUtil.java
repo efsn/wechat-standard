@@ -18,6 +18,11 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author Codeyn
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class HttpUtil {
 

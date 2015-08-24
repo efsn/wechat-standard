@@ -10,10 +10,19 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.codeyn.base.result.BaseResult;
 
+/**
+ * 
+ * @author Codeyn
+ *
+ */
 public class WcApiClient{
     private static Logger logger = LoggerFactory.getLogger(WcApiClient.class);
 
     private SysBase base;
+    
+    public WcApiClient(SysBase base){
+        this.base = base;
+    }
 
     protected <T extends BaseResult> T doService(Class<T> clazz, ParamService paramService, String url){
         Map<String, Object> map = new HashMap<String, Object>();
@@ -30,10 +39,6 @@ public class WcApiClient{
 
     public SysBase getBase(){
         return base;
-    }
-
-    public void setBase(SysBase base){
-        this.base = base;
     }
 
     public interface ParamService{

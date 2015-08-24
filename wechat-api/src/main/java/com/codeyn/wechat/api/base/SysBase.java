@@ -3,8 +3,13 @@ package com.codeyn.wechat.api.base;
 public class SysBase{
 
     private String host = "";
-    
+
     private String name;
+
+    public SysBase(String host, String name){
+        this.host = host;
+        this.name = name;
+    }
 
     public String getHost(){
         return host;
@@ -21,7 +26,5 @@ public class SysBase{
     public void setName(String name){
         this.name = name;
     }
-    
-    
-    
+
 }

@@ -7,16 +7,17 @@
 		<artifactId>frame-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>wechat-admin</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
+		<env>dev</env>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -28,22 +29,29 @@
 			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-	
-		<dependency>
-			<groupId>com.codeyn</groupId>
-			<artifactId>frame-jfinal</artifactId>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>com.codeyn</groupId>
 			<artifactId>wechat-common</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
-		
+
 	</dependencies>
 
 
 	<build>
+		<finalName>wechat-admin</finalName>
+
+		<filters>
+			<filter>src/main/filters/filter-${env}.properties</filter>
+		</filters>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
 		<plugins>
 			<plugin>
