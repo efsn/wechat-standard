@@ -5,7 +5,7 @@
 
 	<filter>
 		<filter-name>encoding</filter-name>
-		<filter-class>com.sqq.jfinal.base.CharSetFilter</filter-class>
+		<filter-class>com.codeyn.jfinal.base.CharsetFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>

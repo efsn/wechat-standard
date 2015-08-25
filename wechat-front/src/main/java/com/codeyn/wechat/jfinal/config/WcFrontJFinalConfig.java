@@ -40,8 +40,8 @@ public class WcFrontJFinalConfig extends BaseConfig {
         me.setDevMode(PropKit.getBoolean("devMode", false));
         me.setEncoding(Const.DEFAULT_ENCODING);
 
-        me.setError404View("/WEB-INF/error/404.html");
-        me.setError500View("/WEB-INF/error/500.html");
+        me.setError404View("/WEB-INF/errors/404.html");
+        me.setError500View("/WEB-INF/errors/500.html");
 
         // freemarker add static template
         Set<String> packages = new HashSet<>();
