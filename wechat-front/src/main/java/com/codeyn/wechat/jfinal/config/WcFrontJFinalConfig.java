@@ -3,8 +3,8 @@ package com.codeyn.wechat.jfinal.config;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.codeyn.base.util.PackageScanner;
 import com.codeyn.jfinal.config.BaseConfig;
-import com.codeyn.utils.PackageScanner;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Interceptors;
 import com.jfinal.core.Const;
