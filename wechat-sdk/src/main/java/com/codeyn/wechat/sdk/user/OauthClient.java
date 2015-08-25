@@ -36,7 +36,7 @@ public class OauthClient extends WcClient{
      */
     public String oauth2(String url, String scope, String state) {
         StringBuffer sb = new StringBuffer(
-                "https://open.weixin.qq.com/connect/oauth2/authorize?appid=").append(getWxBase().getAppId())
+                "https://open.weixin.qq.com/connect/oauth2/authorize?appid=").append(getWcBase().getAppId())
                 .append("&redirect_uri=").append(url).append("&response_type=code")
                 .append("&scope=").append(scope).append("&state=")
                 .append(state).append("#wechat_redirect");
@@ -97,8 +97,8 @@ public class OauthClient extends WcClient{
 
             @Override
             public void init(Map<String, String> map) {
-                map.put("appid", getWxBase().getAppId());
-                map.put("secret", getWxBase().getAppSecret());
+                map.put("appid", getWcBase().getAppId());
+                map.put("secret", getWcBase().getAppSecret());
                 map.put("code", code);
             }
             
@@ -113,7 +113,7 @@ public class OauthClient extends WcClient{
 
             @Override
             public void init(Map<String, String> map) {
-                map.put("appid", getWxBase().getAppId());
+                map.put("appid", getWcBase().getAppId());
                 map.put("refresh_token", refreshToken);
             }
             

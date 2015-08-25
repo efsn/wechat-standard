@@ -143,7 +143,7 @@ public class NewsService {
         List<NewsArticle> list = NewsArticleService.getArticles(newsId);
         
         String accessToken = WcCache.getAccessToken(tenantId);
-        Media rs = getClient(tenantId).uploadNews(accessToken, getNewsJson(list, accessToken, tenantId));
+        Media rs = getClient(tenantId).uploadNews(accessToken, getNewsJson(list, accessToken, tenantId), true);
 
         // 回调校验accessToken是否有效
         WcCache.refreshAccessTokenIfInvalid(rs, tenantId);
@@ -158,7 +158,7 @@ public class NewsService {
             NewsArticle na = list.get(i);
             String imageUrl = na.getStr("cover_pic_url");
             if (StringUtils.isNotBlank(imageUrl)) {
-                String mediaId = WxMediaService.upload(tenantId, MediaType.THUMB, imageUrl, true);
+                String mediaId = WcMediaService.upload(tenantId, MediaType.THUMB, imageUrl, true);
 
                 JSONObject item = new JSONObject();
                 item.put("thumb_media_id", mediaId);

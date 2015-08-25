@@ -33,8 +33,8 @@ public class AccessTokenClient extends WcClient {
 
             @Override
             public void init(Map<String, String> map) {
-                map.put("appid", getWxBase().getAppId());
-                map.put("secret", getWxBase().getAppSecret());
+                map.put("appid", getWcBase().getAppId());
+                map.put("secret", getWcBase().getAppSecret());
             }
 	        
 	    }, "/cgi-bin/token?grant_type=client_credential");

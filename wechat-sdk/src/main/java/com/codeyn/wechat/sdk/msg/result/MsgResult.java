@@ -32,7 +32,7 @@ public class MsgResult extends WcResult {
     }
     
     public boolean isSuccess(){
-        return "SEND_SUCCESS".equals(msg_status);
+        return msg_status == null ? super.isSuccess() : "SEND_SUCCESS".equals(msg_status);
     }
     
 }
