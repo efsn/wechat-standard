@@ -1,12 +1,9 @@
 package com.codeyn.wechat.jfinal.config;
 
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
 
-import com.codeyn.jfinal.config.ArpBuilder;
 import com.codeyn.jfinal.config.BaseConfig;
-import com.codeyn.resouce.bus.ds.DataSourceType;
 import com.codeyn.utils.PackageScanner;
 import com.codeyn.wechat.jfinal.interceptor.ResourceInterceptor;
 import com.jfinal.config.Constants;
@@ -38,13 +35,7 @@ public class WcAdminJFinalConfig extends BaseConfig {
         FreeMarkerRender.setProperties(loadPropertyFile("jfinal/freemarker.properties"));
 
         // configurate datasource & model mapping
-        ArpBuilder arpBuilder = new ArpBuilder("wechat-admin", DataSourceType.DRUID);
-        Properties dsProp = loadPropertyFile("jfinal/dspool.properties");
-        arpBuilder.configure(null, dsProp);
-        Set<String> packages = new HashSet<>();
-        packages.add("com.codeyn.wechat.*.model");
-        arpBuilder.mapping(packages.toArray(new String[packages.size()]));
-        addArp(arpBuilder.build());
+        loadPropertyFile("jfinal/datasource.properties");
     }
 
     @Override

@@ -8,11 +8,8 @@ import com.codeyn.jfinal.annos.JFinalAnnos.Route;
 import com.codeyn.wechat.jfinal.base.MsgController;
 import com.codeyn.wechat.sdk.msg.model.receive.EventMsg;
 import com.codeyn.wechat.sdk.msg.model.receive.NormalMsg;
-import com.codeyn.wechat.sdk.msg.model.send.SentMsg;
 import com.codeyn.wechat.sdk.msg.result.TemplateMsgResult;
-import com.codeyn.wechat.service.msg.WcMsgService;
 import com.codeyn.wechat.service.user.FansService;
-import com.codeyn.wechat.wc.enums.WcEventType;
 import com.codeyn.wechat.wc.template.TemplateMsgSender;
 import com.codeyn.wechat.wc.template.WcMsgSenderFactory;
 import com.codeyn.wechat.wc.template.WcMsgType;
@@ -28,30 +25,12 @@ public class WcMsgController extends MsgController {
 
     @Override
     protected void processTextMsg(NormalMsg msg) {
-        // 保存接受到的消息
-        WcMsgService.saveNormalMsg(msg, getTenantId());
-
-        // 自动回复机器人
-        SentMsg sentMsg = WcMsgService.getSentMsg(msg, getTenantId(), WcEventType.ROBOT);
-        if (sentMsg == null) {
-            renderNull();
-        } else {
-            renderMsg(sentMsg);
-        }
+        
     }
 
     @Override
     protected void processSubcribleEvent(EventMsg msg) {
-        // 保存接受到的消息
-        WcMsgService.saveEventMsg(msg, getTenantId());
-        FansService.save(getTenantId(), msg.getFromUserName());
-
-        SentMsg sentMsg = WcMsgService.getSentMsg(msg, getTenantId(), WcEventType.SUBSTRIBE);
-        if (sentMsg == null) {
-            renderNull();
-        } else {
-            renderMsg(sentMsg);
-        }
+        
     }
 
     @Override

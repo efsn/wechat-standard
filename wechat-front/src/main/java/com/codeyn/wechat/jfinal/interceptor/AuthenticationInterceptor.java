@@ -30,7 +30,7 @@ public class AuthenticationInterceptor implements Interceptor {
     @Override
     public void intercept(Invocation ai) {
         Method actionMethod = ai.getMethod();
-        WcJFinalBaseController wxJFinalBaseController = (WcJFinalBaseController) ai.getController();
+        WcJFinalBaseController wcJFinalBaseController = (WcJFinalBaseController) ai.getController();
 
         // 判断action是否需要验证用户是否登录
         if (!actionMethod.isAnnotationPresent(VerifyLogin.class)) {
@@ -39,17 +39,17 @@ public class AuthenticationInterceptor implements Interceptor {
         }
 
         // 验证用户是否已登录
-        if (wxJFinalBaseController.getMemberId() != null) {
-            ai.invoke();
-            return;
-        }
+//        if (wcJFinalBaseController.getMemberId() != null) {
+//            ai.invoke();
+//            return;
+//        }
 
         // 页面跳转-异步请求返回错误报文|重定向到注册
-        if (FrontUtil.isAjax(wxJFinalBaseController.getRequest())) {
+        if (FrontUtil.isAjax(wcJFinalBaseController.getRequest())) {
             DefaultStatus defaultStatus = new DefaultStatus(801, "用户未登录");
-            wxJFinalBaseController.renderJson(ResultHelper.failResult(defaultStatus));
+            wcJFinalBaseController.renderJson(ResultHelper.failResult(defaultStatus));
         } else {
-            wxJFinalBaseController.redirect("/toRegister?sourceUrl=" + WcUtil.getSourceUrl(wxJFinalBaseController));
+            wcJFinalBaseController.redirect("/toRegister?sourceUrl=" + WcUtil.getSourceUrl(wcJFinalBaseController));
         }
     }
 
