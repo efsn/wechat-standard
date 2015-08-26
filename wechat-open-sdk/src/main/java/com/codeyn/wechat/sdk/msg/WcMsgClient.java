@@ -1,11 +1,11 @@
-package com.codeyn.wechat.api.msg;
+package com.codeyn.wechat.sdk.msg;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.codeyn.base.result.DataResult;
-import com.codeyn.wechat.api.base.SysBase;
-import com.codeyn.wechat.api.base.WcApiClient;
+import com.codeyn.wechat.sdk.base.SysBase;
+import com.codeyn.wechat.sdk.base.WcApiClient;
 
 /**
  * 微信对外服务

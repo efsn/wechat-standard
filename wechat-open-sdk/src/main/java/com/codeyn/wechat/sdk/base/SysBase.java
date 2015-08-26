@@ -1,4 +1,4 @@
-package com.codeyn.wechat.api.base;
+package com.codeyn.wechat.sdk.base;
 
 public class SysBase{
 
