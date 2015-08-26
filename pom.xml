@@ -12,7 +12,7 @@
 		<module>wechat-admin</module>
 		<module>wechat-common</module>
 		<module>wechat-sdk</module>
-		<module>wechat-api</module>
+		<module>wechat-open-sdk</module>
 		<module>wechat-mock</module>
 	</modules>
 
