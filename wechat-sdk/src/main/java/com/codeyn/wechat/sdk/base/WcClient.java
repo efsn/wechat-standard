@@ -22,14 +22,14 @@ public abstract class WcClient {
     
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private WcBase wxBase;
+	private WcBase wcBase;
 	
 	private Integer connectTimeout;
 	
 	private Integer readTimeout;
 	
-	protected WcClient(WcBase wxBase){
-	    this.wxBase = wxBase;
+	protected WcClient(WcBase wcBase){
+	    this.wcBase = wcBase;
 	    setConnectTimeout(WcClientFactory.getGlobalConnectTimeOut());
 	    setReadTimeout(WcClientFactory.getGlobalReadTimeout());
 	}
@@ -61,7 +61,7 @@ public abstract class WcClient {
 	protected <T extends WcResult> T doGet(String key, Class<T> clazz, ParamService paramService, String url) {
 	    Map<String, String> map = new HashMap<>();
 	    paramService.init(map);
-	    String response = HttpUtil.get(connectTimeout, readTimeout, wxBase.getHost() + url, map);
+	    String response = HttpUtil.get(connectTimeout, readTimeout, wcBase.getHost() + url, map);
 	    logger.debug(response);
 	    return StringUtils.isBlank(response) ? null : StringUtils.isBlank(key) ? 
                 JSON.parseObject(response, clazz) : JSON.parseObject(response).getObject(key, clazz);
@@ -78,7 +78,7 @@ public abstract class WcClient {
 	protected <T extends WcResult> T doPost(String key, Class<T> clazz, ParamService paramService, String url) {
         Map<String, String> map = new HashMap<>();
         paramService.init(map);
-        String response = HttpUtil.post(connectTimeout, readTimeout, wxBase.getHost() + url, map.get(KEY));
+        String response = HttpUtil.post(connectTimeout, readTimeout, wcBase.getHost() + url, map.get(KEY));
         logger.debug(response);
         return StringUtils.isBlank(response) ? null : StringUtils.isBlank(key) ? 
                 JSON.parseObject(response, clazz) : JSON.parseObject(response).getObject(key, clazz);
@@ -88,8 +88,8 @@ public abstract class WcClient {
 	    void init(Map<String, String> map);
 	}
 	
-	public WcBase getWxBase(){
-	    return wxBase;
+	public WcBase getWcBase(){
+	    return wcBase;
 	}
 
     public Integer getConnectTimeout() {

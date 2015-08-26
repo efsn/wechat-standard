@@ -8,11 +8,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.codeyn.wechat.sdk.base.WcClient;
 import com.codeyn.wechat.sdk.base.model.WcBase;
@@ -39,23 +37,25 @@ import com.codeyn.wechat.sdk.msg.result.Article;
  */
 public class MaterialClient extends WcClient {
 
-    public MaterialClient(WcBase wxBase) {
-        super(wxBase);
+    public MaterialClient(WcBase wcBase) {
+        super(wcBase);
     }
 
     /**
      * 上传图文消息内的图片获取URL 图片仅支持jpg/png格式，大小必须在1MB以下
      */
     public Media uploadNewsImg(String accessToken, File file) {
-        StringBuffer urlStr = new StringBuffer(getWxBase().getHost()).append("/cgi-bin/media/uploadimg?access_token=")
+        StringBuffer urlStr = new StringBuffer(getWcBase().getHost()).append("/cgi-bin/media/uploadimg?access_token=")
                 .append(accessToken);
-        return upload(urlStr.toString(), file);
+        return uploadMedia(urlStr.toString(), file);
     }
 
     /**
-     * 上传永久图文消息素材（一个图文消息支持1到10条图文）
+     * 新增永久图文素材
      */
-    public Media uploadNews(String accessToken, final String json) {
+    public Media uploadNews(String accessToken, final String json, boolean isTemp) {
+        StringBuffer sb = new StringBuffer("/cgi-bin/").append(isTemp ? "media/uploadnews" : "material/add_news")
+                .append("?access_token=").append(accessToken);
         return doPost(Media.class, new ParamService() {
 
             @Override
@@ -63,90 +63,20 @@ public class MaterialClient extends WcClient {
                 map.put(KEY, json);
             }
 
-        }, "/cgi-bin/media/uploadnews?access_token=" + accessToken);
+        }, sb.toString());
     }
 
     /**
-     * 上传临时素材到腾讯服务器
+     * 上传素材
      * 
      * @param type
-     *            目前腾讯type 只支持 image，voice，video，thumb
+     *            只支持 image，voice，video，thumb
      */
-    public Media uploadTempMedia(MediaType type, File file, String accessToken) {
-        StringBuffer urlStr = new StringBuffer(getWxBase().getHost()).append("/cgi-bin/media/upload?access_token=")
-                .append(accessToken).append("&type=").append(type.getFlag());
-        return upload(urlStr.toString(), file);
-    }
-
-    /**
-     * 永久素材
-     * @param type 只支持 image，voice，video，thumb
-     */
-    public Media uploadAbidingMedia(MediaType type, File file, String accessToken) {
-        StringBuffer urlStr = new StringBuffer(getWxBase().getHost())
-                .append("/cgi-bin/material/add_material?access_token=").append(accessToken).append("&type=")
-                .append(type.getFlag());
-        return upload(urlStr.toString(), file);
-    }
-
-    /**
-     * 上传临时素材到腾讯服务器
-     * 
-     * @param type
-     *            目前腾讯type 只支持 image，voice，video，thumb
-     */
-    private Media upload(String urlStr, File file) {
-        String res = "";
-        HttpURLConnection conn = null;
-        String boundary = "---------------------------123821742118716";
-        try {
-            URL url = new URL(urlStr);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(30000);
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            conn.setUseCaches(false);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Connection", "Keep-Alive");
-            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
-            conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-            OutputStream out = new DataOutputStream(conn.getOutputStream());
-            StringBuffer strBuf = new StringBuffer();
-            strBuf.append("\r\n--").append(boundary).append("\r\n");
-            strBuf.append("Content-Disposition: form-data;filename=\"" + file.getName() + "\"\r\n");
-            strBuf.append("Content-Type:application/octet-stream\r\n\r\n");
-            out.write(strBuf.toString().getBytes());
-            int bytes = 0;
-            byte[] bufferOut = new byte[1024];
-            FileInputStream in = new FileInputStream(file);
-            while ((bytes = in.read(bufferOut)) != -1) {
-                out.write(bufferOut, 0, bytes);
-            }
-            in.close();
-            byte[] endData = ("\r\n--" + boundary + "--\r\n").getBytes();
-            out.write(endData);
-            out.flush();
-            out.close();
-
-            // 读取返回数据
-            StringBuffer rs = new StringBuffer();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                rs.append(line).append("\n");
-            }
-            res = rs.toString();
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-                conn = null;
-            }
-        }
-        return JSON.parseObject(res, Media.class);
+    public Media uploadMedia(MediaType type, File file, String accessToken, boolean isTemp) {
+        StringBuffer urlStr = new StringBuffer(getWcBase().getHost()).append("/cgi-bin/")
+                .append(isTemp ? "media/upload" : "material/add_material").append("?access_token=").append(accessToken)
+                .append("&type=").append(type.getFlag());
+        return uploadMedia(urlStr.toString(), file);
     }
 
     /**
@@ -190,34 +120,16 @@ public class MaterialClient extends WcClient {
     }
 
     /**
-     * 新增永久图文素材
-     */
-    public Media addNews(String accessToken, final List<Article> articles) {
-        return doPost(Media.class, new ParamService() {
-
-            @Override
-            public void init(Map<String, String> map) {
-                JSONObject json = new JSONObject();
-                JSONArray arr = new JSONArray();
-                arr.addAll(articles);
-                json.put("articles", arr);
-                map.put(KEY, json.toJSONString());
-            }
-
-        }, "/cgi-bin/material/add_news?access_token=" + accessToken);
-    }
-
-    /**
      * 新增其他类型永久素材
      * 通过POST表单来调用接口，表单id为media，包含需要上传的素材内容，有filename/filelength/content-type等信息
      * 
      * TODO 在上传视频素材时需要POST另一个表单，id为description，包含素材的描述信息，内容格式为JSON
      */
     public Media addOtherMaterial(String accessToken, File file, MediaType type) {
-        StringBuffer urlStr = new StringBuffer(getWxBase().getHost())
+        StringBuffer urlStr = new StringBuffer(getWcBase().getHost())
                 .append("/cgi-bin/material/add_material?access_token=").append(accessToken).append("&type=")
                 .append(type.getFlag());
-        return upload(urlStr.toString(), file);
+        return uploadMedia(urlStr.toString(), file);
     }
 
     /**
@@ -284,16 +196,12 @@ public class MaterialClient extends WcClient {
     /**
      * 修改永久图文素材
      */
-    public WcResult updateNews(String accessToken, final String mediaId, final Integer index, final Article article) {
+    public WcResult updateNews(String accessToken, final String json) {
         return doPost(WcResult.class, new ParamService() {
 
             @Override
             public void init(Map<String, String> map) {
-                JSONObject json = new JSONObject();
-                json.put("media_id", mediaId);
-                json.put("index", index);
-                json.put("articles", article);
-                map.put(KEY, json.toJSONString());
+                map.put(KEY, json);
             }
 
         }, "/cgi-bin/material/update_news?access_token=" + accessToken);
@@ -347,6 +255,66 @@ public class MaterialClient extends WcClient {
             }
 
         }, "/cgi-bin/material/batchget_material?access_token=" + accessToken);
+    }
+
+    /**
+     * 上传素材到腾讯服务器
+     * 
+     * @param type
+     *            目前腾讯type 只支持 image，voice，video，thumb
+     */
+    private Media uploadMedia(String urlStr, File file) {
+        String res = "";
+        HttpURLConnection conn = null;
+        String boundary = "-----------------------------123821742118716";
+        try {
+            URL url = new URL(urlStr);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(50000);
+            conn.setReadTimeout(30000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setUseCaches(false);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
+            conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+            OutputStream out = new DataOutputStream(conn.getOutputStream());
+            StringBuffer strBuf = new StringBuffer();
+            strBuf.append("\r\n--").append(boundary).append("\r\n");
+            strBuf.append("Content-Disposition: form-data; name=\"media\"; filename=\"" + file.getName() + "\"\r\n");
+            strBuf.append("Content-Type:application/octet-stream\r\n\r\n");
+            out.write(strBuf.toString().getBytes());
+            int len = 0;
+            byte[] bufferOut = new byte[1024];
+            FileInputStream in = new FileInputStream(file);
+            while ((len = in.read(bufferOut)) != -1) {
+                out.write(bufferOut, 0, len);
+            }
+            in.close();
+            byte[] endData = ("\r\n--" + boundary + "--\r\n").getBytes();
+            out.write(endData);
+            out.flush();
+            out.close();
+
+            // 读取返回数据
+            StringBuffer rs = new StringBuffer();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                rs.append(line).append("\r\n");
+            }
+            res = rs.toString();
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+                conn = null;
+            }
+        }
+        return JSON.parseObject(res, Media.class);
     }
 
 }
