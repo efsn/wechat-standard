@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 
 	<display-name>wechat-standard-admin</display-name>
 
@@ -11,7 +13,7 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>encoding</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -22,12 +24,12 @@
 		<filter-name>webLogFilter</filter-name>
 		<filter-class>com.codeyn.base.log.WebLogFilter</filter-class>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>webLogFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>jfinal</filter-name>
 		<filter-class>com.jfinal.core.JFinalFilter</filter-class>
@@ -50,10 +52,10 @@
 		<error-code>403</error-code>
 		<location>/403.html</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.html</location>
 	</error-page>
-	
+
 </web-app>
