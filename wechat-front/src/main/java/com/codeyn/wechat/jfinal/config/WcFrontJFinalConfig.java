@@ -3,7 +3,6 @@ package com.codeyn.wechat.jfinal.config;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.codeyn.base.util.PackageScanner;
 import com.codeyn.jfinal.config.BaseConfig;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Interceptors;
@@ -11,8 +10,6 @@ import com.jfinal.core.Const;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.render.FreeMarkerRender;
-
-import freemarker.template.TemplateHashModel;
 
 /**
  * Base framework configuration
@@ -48,12 +45,7 @@ public class WcFrontJFinalConfig extends BaseConfig {
         packages.add("com.codeyn.wechat.*.enums");
         packages.add("com.codeyn.wechat.utils");
         packages.add("com.codeyn.wechat.jfinal.bridger");
-
-        Set<Class<?>> clazzes = PackageScanner.scanPackage(packages.toArray(new String[packages.size()]));
-        for (Class<?> clazz : clazzes) {
-            TemplateHashModel tmp = buildStaticTemplate(clazz.getName());
-            FreeMarkerRender.getConfiguration().setSharedVariable(clazz.getSimpleName(), tmp);
-        }
+        setSharedVariable(packages);
 
         // TODO download
         me.setFileRenderPath("/download");
