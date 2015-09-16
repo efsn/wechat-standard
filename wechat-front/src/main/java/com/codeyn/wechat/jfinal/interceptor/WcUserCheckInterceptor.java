@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.codeyn.base.exception.DefaultStatus;
 import com.codeyn.base.result.ResultHelper;
-import com.codeyn.wechat.jfinal.base.WcJFinalBaseController;
+import com.codeyn.wechat.jfinal.base.WcBaseController;
 import com.codeyn.wechat.jfinal.interceptor.AuthenticationInterceptor.VerifyLogin;
 import com.codeyn.wechat.system.model.WcConfig;
 import com.codeyn.wechat.system.service.WcConfigService;
@@ -43,7 +43,7 @@ public class WcUserCheckInterceptor implements Interceptor {
 		}
 
 		// 验证用户是否已经获取到openId
-		WcJFinalBaseController wxJFinalBaseController = (WcJFinalBaseController) ai.getController();
+		WcBaseController wxJFinalBaseController = (WcBaseController) ai.getController();
 		if (wxJFinalBaseController.getOpenId() != null) {
 			ai.invoke();
 			return;

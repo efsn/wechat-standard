@@ -11,7 +11,7 @@ import com.jfinal.render.FreeMarkerRender;
 
 import freemarker.template.Template;
 
-public class WcJFinalBaseController extends BaseController {
+public class WcBaseController extends BaseController {
 
     private final static String DEFAULT_STYLE = "000000";
 

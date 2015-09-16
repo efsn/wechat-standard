@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.codeyn.base.exception.DefaultStatus;
 import com.codeyn.base.result.ResultHelper;
-import com.codeyn.wechat.jfinal.base.WcJFinalBaseController;
+import com.codeyn.wechat.jfinal.base.WcBaseController;
 import com.codeyn.wechat.utils.FrontUtil;
 import com.codeyn.wechat.utils.WcUtil;
 import com.jfinal.aop.Interceptor;
@@ -30,7 +30,7 @@ public class AuthenticationInterceptor implements Interceptor {
     @Override
     public void intercept(Invocation ai) {
         Method actionMethod = ai.getMethod();
-        WcJFinalBaseController wcJFinalBaseController = (WcJFinalBaseController) ai.getController();
+        WcBaseController wcJFinalBaseController = (WcBaseController) ai.getController();
 
         // 判断action是否需要验证用户是否登录
         if (!actionMethod.isAnnotationPresent(VerifyLogin.class)) {

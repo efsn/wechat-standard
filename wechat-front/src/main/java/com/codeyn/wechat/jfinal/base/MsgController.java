@@ -21,7 +21,7 @@ import com.jfinal.kit.HttpKit;
 /**
  * 接收微信服务器消息，自动解析成 InMsg 并分发到相应的处理方法
  */
-public abstract class MsgController extends WcJFinalBaseController {
+public abstract class MsgController extends WcBaseController {
 
     /**
      * weixin 公众号服务器调用唯一入口，即在开发者中心输入的 URL 必须要指向此 action
