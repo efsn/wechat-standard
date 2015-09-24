@@ -43,7 +43,7 @@
     <script type="text/javascript" src="${res_static}/wx/js/p/standard/jquery.qrcode-0.11.0.min.js"></script>
     
     <script type="text/javascript">
-	    jQuery.extend({
+	    $.extend({
 		    wxAjax : function(obj){
 		    	$.getJSON(obj.url, obj.param, function(data){
 		    		if(data.code == 801){

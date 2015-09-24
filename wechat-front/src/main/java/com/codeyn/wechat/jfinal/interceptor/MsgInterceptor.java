@@ -11,7 +11,6 @@ import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 
-
 /**
  * Msg 拦截器
  * 
