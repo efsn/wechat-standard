@@ -52,10 +52,10 @@ public class WcAdminJFinalConfig extends BaseConfig {
         setSharedVariable(packages);
 
         // TODO download
-        me.setFileRenderPath("/download");
+        me.setBaseDownloadPath("/download");
 
         // TODO upload smartUpload
-        me.setUploadedFileSaveDirectory("/upload");
+        me.setBaseUploadPath("/upload");
     }
 
     @Override

@@ -56,10 +56,10 @@ public class WcFrontJFinalConfig extends BaseConfig {
         }
 
         // TODO download
-        me.setFileRenderPath("/download");
+        me.setBaseDownloadPath("/download");
 
         // TODO upload smartUpload
-        me.setUploadedFileSaveDirectory("/upload");
+        me.setBaseUploadPath("/upload");
     }
 
     @Override
